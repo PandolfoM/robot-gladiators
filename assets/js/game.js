@@ -4,14 +4,12 @@ var playerHealth = 100;
 var playerAttack = 10;
 var playerMoney = 10;
 
-console.log(playerName, playerAttack, playerHealth);
-
 // Enemy Robot
-var enemyName = "Maul";
+var enemyNames = ["Maul", "Dooku", "Sidious"];
 var enemyHealth = 50;
 var enemyAttack = 12;
 
-fight = function() {
+var fight = function(enemyName) {
     // Alert players that they are starting the round
     window.alert("Welcome to Robot Gladiators!");
 
@@ -69,11 +67,12 @@ fight = function() {
 };
 
 console.log(playerName);
-console.log("This logs a string, good for leaving yourself a message");
 // This will do math and log 20
 console.log(10 + 10);
 //Display robots name in console
 console.log("Robot: " + playerName);
 
 // Execute fight function
-fight();
+for(var i = 0; i < enemyNames.length; i++) {
+  fight(enemyNames[i])
+}
