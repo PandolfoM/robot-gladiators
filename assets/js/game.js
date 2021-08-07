@@ -23,14 +23,15 @@ var fight = function(enemyName) {
       if (confirmSkip) {
         window.alert(playerName + ' has decided to skip this fight. Goodbye!');
         // subtract money from playerMoney for skipping
-        playerMoney = playerMoney - 10;
+        playerMoney = Math.max(0, playerMoney - 10);
         console.log("playerMoney", playerMoney)
         break;
       }
     }
+    var damage = randomNumber(playerAttack - 3, playerAttack);
 
     // remove enemy's health by subtracting the amount set in the playerAttack variable
-    enemyHealth = enemyHealth - playerAttack;
+    enemyHealth = Math.max(0, enemyHealth - damage);
     console.log(
       playerName + ' attacked ' + enemyName + '. ' + enemyName + ' now has ' + enemyHealth + ' health remaining.'
     );
@@ -49,7 +50,7 @@ var fight = function(enemyName) {
     }
 
     // remove players's health by subtracting the amount set in the enemyAttack variable
-    playerHealth = playerHealth - enemyAttack;
+    playerHealth = Math.max(0, playerHealth - damage);
     console.log(
       enemyName + ' attacked ' + playerName + '. ' + playerName + ' now has ' + playerHealth + ' health remaining.'
     );
@@ -81,12 +82,13 @@ var startGame = function() {
     if (playerHealth > 0) {
       // alerts player for what round their in
       window.alert("Welcome to Robot Gladiators! Round " + ( i + 1 ) );
+      debugger;
 
       // pick new enemy to fight based on the index of enemyNames
       var pickedEnemyName = enemyNames[i];
 
       // reset enemy health
-      enemyHealth = 50;
+      enemyHealth = randomNumber(40, 60);
 
       // fight function
       fight(pickedEnemyName);
@@ -109,6 +111,7 @@ var startGame = function() {
 };
 
 var endGame = function() {
+  window.alert("The game has now ended. Let's see how you did!");
   if (playerHealth > 0) {
     window.alert("Great job, you've survived the game! You now have a score of " + playerMoney + ".");
   }
@@ -173,6 +176,12 @@ var shop = function() {
       shop();
       break;
   }
+};
+
+var randomNumber = function() {
+  var value = Math.floor(Math.random() * (max - min + 1) + min);
+
+  return value;
 };
 
 startGame();
